@@ -11,7 +11,7 @@ repositories {
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-resteasy-reactive'
-    implementation group: 'io.quarkus', name: 'quarkus-smallrye-reactive-messaging-kafka', version: '3.1.0.Final'
+    implementation 'io.quarkus:quarkus-smallrye-reactive-messaging-kafka'
     implementation 'io.quarkus:quarkus-arc'
     implementation 'org.apache.kafka:kafka-clients'
 
