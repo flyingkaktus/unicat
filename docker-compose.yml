@@ -1,0 +1,31 @@
+version: '2.1'
+services:
+
+  producer:
+    image: suchowski/2023-producer-as-native:1.0.0
+    depends_on:
+      - redpanda
+    ports:
+      - "8084:8084" 
+
+  consumer:
+    image: suchowski/2023-consumer-as-native:1.0.0
+    depends_on:
+      - redpanda
+    ports:
+      - "8083:8083"
+
+  consumer2:
+    image: suchowski/2023-consumer-as-native:1.0.0
+    depends_on:
+      - redpanda
+    ports:
+      - "8085:8083"
+
+  redpanda: 
+    image: redpanda-server:latest
+    ports:
+      - "9092:9092"
+      - "9644:9644"
+      - "8082:8082"
+      - "8081:8081"

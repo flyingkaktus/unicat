@@ -9,9 +9,7 @@ import org.eclipse.microprofile.reactive.messaging.Outgoing;
 
 import io.smallrye.mutiny.Multi;
 
-import jakarta.enterprise.context.ApplicationScoped;
 
-@ApplicationScoped
 public class PriceEmitter {
     
     Logger LOGGER = Main.getLogger();
@@ -25,7 +23,7 @@ public class PriceEmitter {
         return Multi.createFrom().ticks().every(Duration.ofSeconds(5))
             .map(x -> {
                 double price = random.nextDouble();
-                LOGGER.info("Generated price: " + price);
+                LOGGER.info(PriceEmitter.class.getName() + " - Generated price: " + price);
                 return price;
             });
     }

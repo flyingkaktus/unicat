@@ -18,15 +18,21 @@ FROM registry.access.redhat.com/ubi8/ubi-minimal:8.6
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
 
+RUN microdnf update && \
+    microdnf install iputils && \
+    microdnf install -y nmap-ncat && \
+    microdnf clean all
+
+
 WORKDIR /work/
 
 RUN chown 1001 /work \
     && chmod "g+rwX" /work \
     && chown 1001:root /work
 
-COPY --chown=1001:root build/*-runner.exe /work/application
+COPY --chown=1001:root build/*-runner /work/application
 
-EXPOSE 8080
+EXPOSE 8084
 USER 1001
 
 CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]

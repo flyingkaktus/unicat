@@ -20,5 +20,6 @@ public class Main {
 
         LOGGER.info("Running main method");
         Quarkus.run(args); 
+
     }
 }

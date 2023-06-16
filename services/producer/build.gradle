@@ -14,7 +14,8 @@ dependencies {
     implementation group: 'io.quarkus', name: 'quarkus-smallrye-reactive-messaging-kafka', version: '3.1.0.Final'
     implementation 'io.quarkus:quarkus-arc'
     implementation 'org.apache.kafka:kafka-clients'
-
+    implementation 'io.quarkus:quarkus-container-image-docker'
+    
     // test-dependencies
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'

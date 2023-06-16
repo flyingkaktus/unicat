@@ -1,6 +1,5 @@
 package org.acme.theProducer;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -19,12 +18,12 @@ public class KafkaPriceProducer {
         this.priceEmitter = priceEmitter;
     }
 
-
-    @PostConstruct
+   
     public void start() {
-        priceEmitter.generate().subscribe().with(price -> {
-            LOGGER.info("Generated price: " + price);
-        });
+/*         priceEmitter.generate().subscribe().with(price -> {
+            LOGGER.info(KafkaPriceProducer.class.getName() + " - Generated price: " + price);
+        }); */
+        LOGGER.info("Starting KafkaPriceProducer");
     }
 
     @PreDestroy
