@@ -14,6 +14,8 @@ services:
       - redpanda
     ports:
       - "8083:8083"
+    environment:
+      - KAFKA_CONSUMER_GROUP_ID=GROUP-01
 
   consumer2:
     image: suchowski/2023-consumer-as-native:1.0.0
@@ -21,6 +23,26 @@ services:
       - redpanda
     ports:
       - "8085:8083"
+    environment:
+      - KAFKA_CONSUMER_GROUP_ID=GROUP-02
+
+  consumer3:
+    image: suchowski/2023-consumer-as-native:1.0.0
+    depends_on:
+      - redpanda
+    ports:
+      - "8086:8083"
+    environment:
+      - KAFKA_CONSUMER_GROUP_ID=GROUP-03
+
+  consumer4:
+    image: suchowski/2023-consumer-as-native:1.0.0
+    depends_on:
+      - redpanda
+    ports:
+      - "8087:8083"
+    environment:
+      - KAFKA_CONSUMER_GROUP_ID=GROUP-04
 
   redpanda: 
     image: redpanda-server:latest
