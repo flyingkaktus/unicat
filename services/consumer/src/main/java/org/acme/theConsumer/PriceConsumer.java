@@ -2,10 +2,25 @@ package org.acme.theConsumer;
 
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import jakarta.enterprise.context.ApplicationScoped;
+
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+
+import java.util.Queue;
+
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
+@Path("/api")
 @ApplicationScoped
 public class PriceConsumer {
+
+    // füge einen logger hinzu
+    private static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger(PriceConsumer.class);
+
+    // Erstelle eine Queue mit 100 Einträgen
+    Queue<ConsumerRecord<String, Double>> queue = new java.util.concurrent.ConcurrentLinkedQueue<>();
 
     @Incoming("prices")
     public void consume(ConsumerRecord<String, Double> record) {
@@ -14,12 +29,16 @@ public class PriceConsumer {
         String topic = record.topic();
         int partition = record.partition();
 
-        printAll(key, value, topic, partition);
-    
+        // füge einen logger hinzu
+        LOGGER.info("Key: " + key + ", value: " + value + ", topic: " + topic + ", partition: " + partition);
+        queue.add(record);
     }
 
-    void printAll(String key, Double value, String topic, int partition) {
-        System.out.println("Key: " + key + ", value: " + value + ", topic: " + topic + ", partition: " + partition);
+    @Path("/prices")
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String get() {
+        return queue.toString();
     }
 
 }
