@@ -16,6 +16,13 @@ dependencies {
     implementation 'org.apache.kafka:kafka-clients'
     implementation 'io.quarkus:quarkus-container-image-docker'
 
+
+    // Hibernate ORM specific dependencies
+    implementation 'io.quarkus:quarkus-hibernate-orm-panache'
+
+    // JDBC driver dependencies
+    implementation 'io.quarkus:quarkus-jdbc-postgresql'
+
     // test-dependencies
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'

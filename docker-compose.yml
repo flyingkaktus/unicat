@@ -1,8 +1,9 @@
-version: '2.1'
+version: '3.3'
 
-name: redpanda-producer-consumer-test
+name: redpanda-producer-consumer
 networks:
   redpanda_network:
+    name: redpanda-network
     driver: bridge
 volumes:
   redpanda: null
@@ -70,7 +71,7 @@ services:
             - name: local-connect-cluster
               url: http://connect:8083
     ports:
-      - 8080:8080
+      - 8082:8080
     networks:
       - redpanda_network
     depends_on:
